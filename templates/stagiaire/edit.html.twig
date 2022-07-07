@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title 'Modifier le stagiaire #' ~ stagiaire.id %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+	        <h1>Modifier Stagiaire #{{ stagiaire.id }}</h1>	  		
+            {{ include('stagiaire/_form.html.twig', {'submitButtonText': 'Modifier Stagiaire'}) }}
+        </div>
+    </div>
+{% endblock %}

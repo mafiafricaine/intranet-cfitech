@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=StagiaireRepository::class)
+ * @ORM\Table(name="stagiaires")
+ * @ORM\HasLifecycleCallbacks
  */
 class Stagiaire
 {
@@ -121,6 +123,16 @@ class Stagiaire
      * @ORM\Column(type="boolean")
      */
     private $inscrit;
+
+    /**
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     */
+    private $dateDeCreation;
+
+    /**
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     */
+    private $dateDeModification;
 
     public function getId(): ?int
     {
@@ -377,5 +389,41 @@ class Stagiaire
         $this->inscrit = $inscrit;
 
         return $this;
+    }
+
+    public function getDateDeCreation(): ?\DateTimeInterface
+    {
+        return $this->dateDeCreation;
+    }
+
+    public function setDateDeCreation(\DateTimeInterface $dateDeCreation): self
+    {
+        $this->dateDeCreation = $dateDeCreation;
+
+        return $this;
+    }
+
+    public function getDateDeModification(): ?\DateTimeInterface
+    {
+        return $this->dateDeModification;
+    }
+
+    public function setDateDeModification(\DateTimeInterface $dateDeModification): self
+    {
+        $this->dateDeModification = $dateDeModification;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist        		
+     * @ORM\PreUpdate    
+     */
+    public function updateTimestamps()
+    {
+        if ($this->getDateDeCreation() === null) {
+            $this->setDateDeCreation(new \DateTimeImmutable);
+        }
+        $this->setDateDeModification(new \DateTimeImmutable);
     }
 }

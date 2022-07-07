@@ -1,20 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StagiaireController!{% endblock %}
+{% block title %}Stagiaires!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/cfitech/intranet-cfitech/src/Controller/StagiaireController.php'|file_link(0) }}">src/Controller/StagiaireController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/cfitech/intranet-cfitech/templates/stagiaire/index.html.twig'|file_link(0) }}">templates/stagiaire/index.html.twig</a></code></li>
-    </ul>
-</div>
+	{# {% set pin_count = pins|length %}
+    {{ pin_count }} #}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Date de Naissance</th>
+                <th>Nationalité</th>
+                <th>Province</th>
+                <th>CESS</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stagiaire in stagiaires %}
+            <tr>
+                <td>{{ stagiaire.nom }}</td>
+                <td>{{ stagiaire.prenom }}</td>
+                <td>{{ stagiaire.email }}</td>
+                <td>{{ stagiaire.dateDeNaissance|date }}</td>
+                <td>{{ stagiaire.nationalite }}</td>
+                <td>{{ stagiaire.province }}</td>
+                <td>{{ stagiaire.cess }}</td>
+                <td>
+                    <a href="{{ path('app_stagiaire_show', {'id': stagiaire.id}) }}">Details</a>
+                    <a href="{{ path('app_stagiaire_edit', {'id': stagiaire.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Pas encore de stagiaire</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
 {% endblock %}

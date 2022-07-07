@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ stagiaire.nom }}{% endblock %}
+{% block body %}
+    <article>
+ 		<h1>Fiche du stagiaire {{ stagiaire.nom ~" "~ stagiaire.prenom }}</h1>
+        <p>Nom :        		{{ stagiaire.nom }}</p>
+        <p>Prenom :     		{{ stagiaire.prenom }}</p>
+		<p>Genre :      		{{ stagiaire.genre }}</p>
+        <p>Date de Naissance :  {{ stagiaire.dateDeNaissance|date }}</p>
+		<p>Lieu de Naissance :  {{ stagiaire.lieuDeNaissance }}</p>
+		<p>Pays de Naissance :  {{ stagiaire.paysDeNaissance }}</p>
+		<p>Nationalité :        {{ stagiaire.nationalite }}</p>
+		<p>Adresse :        	{{ stagiaire.adresse }}</p>
+		<p>Code Postal :        {{ stagiaire.codePostal }}</p>
+		<p>Commune :       		{{ stagiaire.commune }}</p>
+		<p>Province :        	{{ stagiaire.province }}</p>
+		<p>Pays :        		{{ stagiaire.pays }}</p>
+		<p>N° GSM :        		{{ stagiaire.gsm }}</p>
+		<p>N° fixe :        	{{ stagiaire.ligneFixe }}</p>
+		<p>Email :        		{{ stagiaire.email }}</p>
+		<p>Registre National :  {{ stagiaire.registreNational }}</p>
+		<p>Frais deplacement :  {{ stagiaire.fraisDeDeplacement }}</p>
+		<p>Compte Bancaire IBAN : {{ stagiaire.compteBancaireIBAN }}</p>
+		<p>Status :        		{{ stagiaire.status }}</p>
+		<p>CESS :        		{{ stagiaire.cess }}</p>
+
+		<p>Pré-inscrit le {{ stagiaire.dateDeCreation|date }}</p>
+		<p>Dernière modification le {{ stagiaire.dateDeModification|date }}</p>
+		
+	</article>
+	<a href="{{ path('app_stagiaire_edit', {id: stagiaire.id}) }}">Modifier Stagiaire | </a>
+	<a href="#" onclick="event.preventDefault(); confirm('Etes vous sur de vouloir le supprimer ?') && document.getElementById('js-pin-delete-form').submit();">Delete | </a>
+	<a href="{{ path('app_stagiaire') }}">Go Back</a>
+
+	<form id="js-pin-delete-form" action="{{ path('app_stagiaire_delete', {id: stagiaire.id}) }}" method="post" style="display:none;">
+		<input type="hidden" name="_method" value="DELETE">
+	</form>
+
+		
+{% endblock %}
