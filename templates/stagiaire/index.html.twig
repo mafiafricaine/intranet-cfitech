@@ -15,6 +15,7 @@
                 <th>Nationalité</th>
                 <th>Province</th>
                 <th>CESS</th>
+                <th>Inscrit</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,10 +25,19 @@
                 <td>{{ stagiaire.nom }}</td>
                 <td>{{ stagiaire.prenom }}</td>
                 <td>{{ stagiaire.email }}</td>
-                <td>{{ stagiaire.dateDeNaissance|date }}</td>
+                <td>{{ stagiaire.dateDeNaissance|date('d/m/Y') }}</td>
                 <td>{{ stagiaire.nationalite }}</td>
                 <td>{{ stagiaire.province }}</td>
-                <td>{{ stagiaire.cess }}</td>
+                {% if stagiaire.cess %}
+                    <td>oui</td>
+                {% else %}
+                    <td>non</td>
+                {% endif %}
+                {% if stagiaire.inscrit %}
+                    <td>oui</td>
+                {% else %}
+                    <td>non</td>
+                {% endif %}
                 <td>
                     <a href="{{ path('app_stagiaire_show', {'id': stagiaire.id}) }}">Details</a>
                     <a href="{{ path('app_stagiaire_edit', {'id': stagiaire.id}) }}">Modifier</a>

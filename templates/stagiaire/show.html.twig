@@ -6,7 +6,7 @@
         <p>Nom :        		{{ stagiaire.nom }}</p>
         <p>Prenom :     		{{ stagiaire.prenom }}</p>
 		<p>Genre :      		{{ stagiaire.genre }}</p>
-        <p>Date de Naissance :  {{ stagiaire.dateDeNaissance|date }}</p>
+        <p>Date de Naissance :  {{ stagiaire.dateDeNaissance|date('d/m/Y') }}</p>
 		<p>Lieu de Naissance :  {{ stagiaire.lieuDeNaissance }}</p>
 		<p>Pays de Naissance :  {{ stagiaire.paysDeNaissance }}</p>
 		<p>Nationalité :        {{ stagiaire.nationalite }}</p>
@@ -22,10 +22,18 @@
 		<p>Frais deplacement :  {{ stagiaire.fraisDeDeplacement }}</p>
 		<p>Compte Bancaire IBAN : {{ stagiaire.compteBancaireIBAN }}</p>
 		<p>Status :        		{{ stagiaire.status }}</p>
-		<p>CESS :        		{{ stagiaire.cess }}</p>
-
-		<p>Pré-inscrit le {{ stagiaire.dateDeCreation|date }}</p>
-		<p>Dernière modification le {{ stagiaire.dateDeModification|date }}</p>
+		<p>CESS :        		{% if stagiaire.cess %}
+                    				oui</p>
+                				{% else %}
+                    				non</p>
+                				{% endif %}
+		<p>Inscrit :        	{% if stagiaire.inscrit %}
+                    				oui</p>
+                				{% else %}
+                    				non</p>
+                				{% endif %}
+		<p>Pré-inscrit le {{ stagiaire.dateDeCreation|date('d/m/Y H:i') }}</p>
+		<p>Dernière modification le {{ stagiaire.dateDeModification|date('d/m/Y H:i') }}</p>
 		
 	</article>
 	<a href="{{ path('app_stagiaire_edit', {id: stagiaire.id}) }}">Modifier Stagiaire | </a>

@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType as TypeDateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Iban;
+use Symfony\Component\Validator\Constraints\IbanValidator;
 
 class StagiaireType extends AbstractType
 {
@@ -27,7 +29,7 @@ class StagiaireType extends AbstractType
             ->add('prenom')
             ->add('dateDeNaissance', TypeDateType::class, array(
                 'widget' => 'choice',
-                'years' => range(date('Y'), date('Y')-100),
+                'years' => range(date('Y')-17, date('Y')-100),
                 'months' => range(1, 12),
                 'days' => range(1, 31),
               ))
