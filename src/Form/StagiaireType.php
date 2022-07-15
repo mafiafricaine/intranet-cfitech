@@ -3,11 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Stagiaire;
-use DateTime;
-use Doctrine\DBAL\Types\DateType;
+use App\Entity\Formation;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType as TypeDateType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Iban;
@@ -27,12 +27,16 @@ class StagiaireType extends AbstractType
             ])
             ->add('nom')
             ->add('prenom')
-            ->add('dateDeNaissance', TypeDateType::class, array(
-                'widget' => 'choice',
-                'years' => range(date('Y')-17, date('Y')-100),
-                'months' => range(1, 12),
-                'days' => range(1, 31),
-              ))
+            ->add('dateDeNaissance', DateType::class, [
+                'widget' => 'single_text',
+
+              ])
+            // ->add('dateDeNaissance', TypeDateType::class, array(
+            //     'widget' => 'choice',
+            //     'years' => range(date('Y')-17, date('Y')-100),
+            //     'months' => range(1, 12),
+            //     'days' => range(1, 31),
+            //   ))
             ->add('paysDeNaissance')
             ->add('lieuDeNaissance')
             ->add('nationalite')
@@ -74,12 +78,24 @@ class StagiaireType extends AbstractType
                     'Oui' => '1',
                 ],
             ])
+            ->add('diplomeObtenu')
             ->add('status', ChoiceType::class, [
                 'choices' => [
                     'Chomage' => 'Chomage',
                     'CPAS' => 'CPAS',
                     'Autre' => 'Autre',
                 ],
+            ])
+            ->add('formation', EntityType::class, [
+                // looks for choices from this entity
+                'class' => Formation::class,
+            
+                // uses the User.username property as the visible option string
+                'choice_label' => 'nom',
+            
+                // used to render a select box, check boxes or radios
+                // 'multiple' => true,
+                // 'expanded' => true,
             ])
             ->add('inscrit')
             

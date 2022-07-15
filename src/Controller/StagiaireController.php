@@ -40,7 +40,7 @@ class StagiaireController extends AbstractController
         $form = $this->createForm(StagiaireType::class, $stagiaire);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            //$pin->setUser($this->getUser());
+            //$stagiaire->setFormation($this->getUser());
             $em->persist($stagiaire);
             $em->flush();
             $this->addFlash('success', 'Stagiaire pré-inscrit !');

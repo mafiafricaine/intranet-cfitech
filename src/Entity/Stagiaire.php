@@ -43,6 +43,7 @@ class Stagiaire
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="Votre champs ne peut pas être vide !")
      */
     private $dateDeNaissance;
 
@@ -169,6 +170,17 @@ class Stagiaire
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
     private $dateDeModification;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min=2, minMessage="Vous devez avoir un diplome de minimum {{ limit }} caractères !")
+     */
+    private $diplomeObtenu;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Formation::class, inversedBy="stagiaire")
+     */
+    private $formation;
 
     public function getId(): ?int
     {
@@ -461,5 +473,29 @@ class Stagiaire
             $this->setDateDeCreation(new \DateTimeImmutable);
         }
         $this->setDateDeModification(new \DateTimeImmutable);
+    }
+
+    public function getDiplomeObtenu(): ?string
+    {
+        return $this->diplomeObtenu;
+    }
+
+    public function setDiplomeObtenu(?string $diplomeObtenu): self
+    {
+        $this->diplomeObtenu = $diplomeObtenu;
+
+        return $this;
+    }
+
+    public function getFormation(): ?Formation
+    {
+        return $this->formation;
+    }
+
+    public function setFormation(?Formation $formation): self
+    {
+        $this->formation = $formation;
+
+        return $this;
     }
 }

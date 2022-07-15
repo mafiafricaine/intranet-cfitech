@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création Formation{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1>Création d'une nouvelle Formation</h1>
+
+            {{ include('formation/_form.html.twig', {'submitButtonText': 'Créer Formation'}) }}
+
+            <a href="{{ path('app_formation_index') }}">Retour à la liste</a>
+        </div>
+    </div>
+        
+{% endblock %}

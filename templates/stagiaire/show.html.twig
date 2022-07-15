@@ -19,7 +19,7 @@
 		<p>N° fixe :        	{{ stagiaire.ligneFixe }}</p>
 		<p>Email :        		{{ stagiaire.email }}</p>
 		<p>Registre National :  {{ stagiaire.registreNational }}</p>
-		<p>Frais deplacement :  {{ stagiaire.fraisDeDeplacement }}</p>
+		<p>Frais de déplacement : {{ stagiaire.fraisDeDeplacement }}</p>
 		<p>Compte Bancaire IBAN : {{ stagiaire.compteBancaireIBAN }}</p>
 		<p>Status :        		{{ stagiaire.status }}</p>
 		<p>CESS :        		{% if stagiaire.cess %}
@@ -27,6 +27,8 @@
                 				{% else %}
                     				non</p>
                 				{% endif %}
+		<p>Plus haut diplôme obtenu : {{ stagiaire.diplomeObtenu }}</p>
+		<p>Formation souhaité : {{ stagiaire.formation.getNom }}</p>
 		<p>Inscrit :        	{% if stagiaire.inscrit %}
                     				oui</p>
                 				{% else %}
